@@ -6,14 +6,24 @@
 ## Functionality
 The user will have a login screen that will take them to a monthly calendar. From there they can click on the day and request time off. All information will be saved in a database that management will have access to.
 Objects to include:
-- Employee list
+- Employee list (user/admin)
 - Color coded blocks indicating days on and off
 - Hours of operation
 - Publish button for sending to employees
 - Print function
 
 ## Data Model
-Stored in the backend will include user login/password and dates on the calendar user is requesting time off.
+
+- User
+    - username
+    - password
+- TimeOff
+    - user
+    - start datetime
+    - end datetime
+- Parameters
+    - name
+    - value
 
 ## Schedule
 ### Week 1
