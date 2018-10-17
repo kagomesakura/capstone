@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/capstone.iml" filepath="$PROJECT_DIR$/.idea/capstone.iml" />
-      <module fileurl="file://$USER_HOME$/PycharmProjects/class_platypus/Code/Kagome/Django/mysite/.idea/mysite.iml" filepath="$USER_HOME$/PycharmProjects/class_platypus/Code/Kagome/Django/mysite/.idea/mysite.iml" />
     </modules>
   </component>
 </project>
