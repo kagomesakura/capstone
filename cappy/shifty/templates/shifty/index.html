@@ -26,13 +26,13 @@
               nextYear: new moment().year()+1
           },
           viewRender: function (view) {
-              var y = moment($('#calendar').fullCalendar('getdate')).year();
+              var y = moment($('#calendar').fullCalendar('getDate')).year();
               $(".fc-prevYear-button").text(y-1);
               $(".fc-nextYear-button").text(y+1);
           },
           minTime: "05:00:00",
           maxTime: "22:00:00",
-          // themeSystem: 'bootstrap4'
+          themeSystem: 'bootstrap4',
 
       })
 
@@ -45,7 +45,7 @@
 
 <title>Shifty</title>
 
-<link rel="stylesheet" type="text/css" href="{% static '/themes.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static '/bootstrap.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
 <body>
 <div id="calendar"></div>
