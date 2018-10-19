@@ -13,40 +13,62 @@
 <script>
     $(function() {
 
-      // page is now ready, initialize the calendar...
+        $('#calendar').fullCalendar({
+            header: {
+                left: "month, agendaWeek, agendaDay",
+                center: "title",
+                right: "today, prevYear, prev, next, nextYear"
+            },
+            editable: true,
+            droppable: true,
 
-      $('#calendar').fullCalendar({
-          header:{
-              left:"month, agendaWeek, agendaDay",
-              center:"title",
-              right:"today, prevYear, prev, next, nextYear"
-          },
-          buttonText: {
-              prevYear: new moment().year()-1,
-              nextYear: new moment().year()+1
-          },
-          viewRender: function (view) {
-              var y = moment($('#calendar').fullCalendar('getDate')).year();
-              $(".fc-prevYear-button").text(y-1);
-              $(".fc-nextYear-button").text(y+1);
-          },
-          minTime: "05:00:00",
-          maxTime: "22:00:00",
-          themeSystem: 'bootstrap4',
+            footer: {
+                object: false
+            },
+            buttonText: {
+                prevYear: new moment().year() - 1,
+                nextYear: new moment().year() + 1
+            },
+            dayClick: function(date, allDay, jsEvent, view) {
+                console.log(date)
+                let text = prompt("Enter Event Name");
+                $('#calendar').fullCalendar('addEventSource', [{title: text, start: date }]);
 
-      })
+            },
+
+            viewRender: function (view) {
+                var y = moment($('#calendar').fullCalendar('getDate')).year();
+                $(".fc-prevYear-button").text(y - 1);
+                $(".fc-nextYear-button").text(y + 1);
+            },
+            minTime: "05:00:00",
+            maxTime: "22:00:00",
+            height: 830,
+            width: 730,
+        });
 
     });
+
+
+
+        // .fullCalendar( ‘removeEvents’ [, idOrFilter ] ) <--to remove events and filter will only remove the one event, not all day
+
+          // eventColor: '#378006'
+         //  eventTextColor:
+        //eventBackgroundColor:
+
 </script>
 
 <style>
 </style>
 </head>
 
-<title>Shifty</title>
+<title>Shifti</title>
 
-<link rel="stylesheet" type="text/css" href="{% static '/bootstrap.min.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">
+
+<!--<link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">-->
+
+<link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}">
 <body>
 <div id="calendar"></div>
 
