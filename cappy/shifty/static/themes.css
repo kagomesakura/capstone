@@ -1,22 +1,16 @@
 #calendar {
-    margin: 10%;
-    width: 80%;
-    height: 80vh;
+    margin: 8%;
+    /*width: 80%;*/
+    /*height: 80vh;*/
     font-family: "Lato", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.5;
-    color: purple;
+    color: black;
     text-align: left;
-    background-color: #2B3E50
-}
-/*div {*/
-    /*width: 80%;*/
-    /*height: 80%;*/
-/*}*/
+    background-color: white
 
-.content-box {
-  box-sizing: content-box;
-     width: 80%;
-     height: 100%;
 }
+
+
+
