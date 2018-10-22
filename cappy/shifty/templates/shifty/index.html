@@ -13,22 +13,20 @@
 <script>
     $(function() {
 
-        $('#save_event_bt').click(function() {
-            $('#calendar').fullCalendar('addEventSource', [{title: text, start: date, allDay: true }]);
-
-
-            var text_inut = document.getElementById('data').value;
-            document.getElementById('display').innerHTML = text_input;
-});
-            document.getElementById('btn').addEventListener('click', clicked);
-            item.save()
+        // $('#save_event_bt').click(function() {
+        //     $('#calendar').fullCalendar('addEventSource', [{title: text, start: date, allDay: true }]);
+//
+//
+//             var text_input = document.getElementById('data').value;
+//             document.getElementById('display').innerHTML = text_input;
+// });
+//             document.getElementById('btn').addEventListener('click', clicked);
+//             item.save()
 
 
             // get the values from the input fields
             // add the event to the calendar
             // do an ajax
-
-        });
 
 
 
@@ -49,11 +47,12 @@
                 nextYear: new moment().year() + 1
             },
             dayClick: function(date, allDay, jsEvent, view) {
-                console.log(date)
-                //let text = prompt("Enter Event Name");
-                //$('#modalButton').html(event.title);
-                //$('#modalBody').html(event.description);
-                //$('#eventUrl').attr('href',event.url);
+                console.log(date);
+                $('#calendar').fullCalendar('addEventSource', [{title: text, start: date, allDay: true }]);
+                let text = prompt("Enter Event Name");
+                $('#modalButton').html(event.title);
+                $('#modalBody').html(event.description);
+                $('#eventUrl').attr('href',event.url);
                 $('#calendarModal').modal();
 
             },
@@ -69,6 +68,7 @@
             width: 730,
         });
 
+        });
 
 
         // .fullCalendar( ‘removeEvents’ [, idOrFilter ] ) <--to remove events and filter will only remove the one event, not all day
@@ -77,7 +77,7 @@
          //  eventTextColor:
         //eventBackgroundColor:
 
-    var input = document.getElementById("userName");
+    // var input = document.getElementById("userName");
 
 </script>
 
