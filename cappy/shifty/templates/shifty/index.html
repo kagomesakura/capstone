@@ -13,6 +13,26 @@
 <script>
     $(function() {
 
+        $('#save_event_bt').click(function() {
+            $('#calendar').fullCalendar('addEventSource', [{title: text, start: date, allDay: true }]);
+
+
+            var text_inut = document.getElementById('data').value;
+            document.getElementById('display').innerHTML = text_input;
+}
+            document.getElementById('btn').addEventListener('click', clicked);
+            item.save()
+
+
+            // get the values from the input fields
+            // add the event to the calendar
+            // do an ajax
+
+        });
+
+    });
+
+
         $('#calendar').fullCalendar({
             header: {
                 left: "month, agendaWeek, agendaDay",
@@ -31,8 +51,11 @@
             },
             dayClick: function(date, allDay, jsEvent, view) {
                 console.log(date)
-                let text = prompt("Enter Event Name");
-                $('#calendar').fullCalendar('addEventSource', [{title: text, start: date }]);
+                //let text = prompt("Enter Event Name");
+                //$('#modalButton').html(event.title);
+                //$('#modalBody').html(event.description);
+                //$('#eventUrl').attr('href',event.url);
+                $('#calendarModal').modal();
 
             },
 
@@ -57,6 +80,8 @@
          //  eventTextColor:
         //eventBackgroundColor:
 
+    var input = document.getElementById("userName");
+
 </script>
 
 <style>
@@ -71,6 +96,33 @@
 <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}">
 <body>
 <div id="calendar"></div>
+
+
+<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
+  <!--Launch demo modal-->
+<!--</button>-->
+
+<!-- Modal -->
+<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add To Schedule</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" placeholder="Enter Name"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="save_event_bt" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 </body>
