@@ -24,50 +24,68 @@
 //             item.save()
 
 
-            // get the values from the input fields
-            // add the event to the calendar
-            // do an ajax
-
+        // get the values from the input fields
+        // add the event to the calendar
+        // do an ajax for save btn to save to database
 
 
         $('#calendar').fullCalendar({
-            header: {
-                left: "month, agendaWeek, agendaDay",
-                center: "title",
-                right: "today, prevYear, prev, next, nextYear"
-            },
-            editable: true,
-            droppable: true,
+                header: {
+                    left: "month, agendaWeek, agendaDay",
+                    center: "title",
+                    right: "today, prevYear, prev, next, nextYear"
+                },
+                editable: true,
+                droppable: true,
 
-            footer: {
-                object: false
-            },
-            buttonText: {
-                prevYear: new moment().year() - 1,
-                nextYear: new moment().year() + 1
-            },
-            dayClick: function(date, allDay, jsEvent, view) {
-                console.log(date);
-                $('#calendar').fullCalendar('addEventSource', [{title: text, start: date, allDay: true }]);
-                let text = prompt("Enter Event Name");
-                $('#modalButton').html(event.title);
-                $('#modalBody').html(event.description);
-                $('#eventUrl').attr('href',event.url);
-                $('#calendarModal').modal();
+                footer: {
+                    object: false
+                },
+                buttonText: {
+                    prevYear: new moment().year() - 1,
+                    nextYear: new moment().year() + 1
+                },
+                dayClick: function (date, allDay, jsEvent, view) {
+                    console.log(date);
+                    // let text = prompt("Enter Event Name");
+                    // let text = 'a';
+                    $('#modalButton').html(event.title);
+                    $('#modalBody').html(event.description);
+                    $('#eventUrl').attr('href', event.url);
+                    $('#calendarModal').modal();
 
-            },
 
-            viewRender: function (view) {
-                var y = moment($('#calendar').fullCalendar('getDate')).year();
-                $(".fc-prevYear-button").text(y - 1);
-                $(".fc-nextYear-button").text(y + 1);
-            },
-            minTime: "05:00:00",
-            maxTime: "22:00:00",
+
+                },
+
+                viewRender: function (view) {
+                    var y = moment($('#calendar').fullCalendar('getDate')).year();
+                    $(".fc-prevYear-button").text(y - 1);
+                    $(".fc-nextYear-button").text(y + 1);
+                },
+                saveChanges: function () {
+                    var event_text;
+                    $('#save').click(function () {
+                        event_text = $("#event_text").value();
+                        $('#calendar').modal('hide');
+                        $('#calendar').fullCalendar('addEventSource', [{
+                        title: $('#event_text').val(),
+                        start: date,
+                        allDay: true
+                    }]);
+                    });
+                },
+
+                minTime: "05:00:00",
+                maxTime: "22:00:00",
             height: 830,
             width: 730,
         });
 
+        });
+    $("#save_event_bt").click(function() {
+        $('#calendar').saveChanges();
+        console.log('a');
         });
 
 
@@ -111,7 +129,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <input type="text" placeholder="Enter Name"/>
+        <input type="text" placeholder="Enter Name" id="event_text"/>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
