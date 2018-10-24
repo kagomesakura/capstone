@@ -10,139 +10,122 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet" media="print"/>
 
-<script>
-    $(function() {
+    <script>
 
-        // $('#save_event_bt').click(function() {
-        //     $('#calendar').fullCalendar('addEventSource', [{title: text, start: date, allDay: true }]);
-//
-//
-//             var text_input = document.getElementById('data').value;
-//             document.getElementById('display').innerHTML = text_input;
-// });
-//             document.getElementById('btn').addEventListener('click', clicked);
-//             item.save()
-
-
-        // get the values from the input fields
-        // add the event to the calendar
-        // do an ajax for save btn to save to database
-
+ $(document).ready(function() {
 
         $('#calendar').fullCalendar({
-                header: {
-                    left: "month, agendaWeek, agendaDay",
-                    center: "title",
-                    right: "today, prevYear, prev, next, nextYear"
-                },
-                editable: true,
-                droppable: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: '2016-09-12',
+            navLinks: true, // can click day/week names to navigate views
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end) {
+                // Display the modal.
+                // You could fill in the start and end fields based on the parameters
+                $('.modal').modal('show');
 
-                footer: {
-                    object: false
-                },
-                buttonText: {
-                    prevYear: new moment().year() - 1,
-                    nextYear: new moment().year() + 1
-                },
-                dayClick: function (date, allDay, jsEvent, view) {
-                    console.log(date);
-                    // let text = prompt("Enter Event Name");
-                    // let text = 'a';
-                    $('#modalButton').html(event.title);
-                    $('#modalBody').html(event.description);
-                    $('#eventUrl').attr('href', event.url);
-                    $('#calendarModal').modal();
+            },
+            eventClick: function(event, element) {
+                // Display the modal and set the values to the event values.
+                $('.modal').modal('show');
+                $('.modal').find('#title').val(event.title);
+                $('.modal').find('#starts-at').val(event.start);
+                $('.modal').find('#ends-at').val(event.end);
 
-
-
-                },
-
-                viewRender: function (view) {
-                    var y = moment($('#calendar').fullCalendar('getDate')).year();
-                    $(".fc-prevYear-button").text(y - 1);
-                    $(".fc-nextYear-button").text(y + 1);
-                },
-                saveChanges: function () {
-                    var event_text;
-                    $('#save').click(function () {
-                        event_text = $("#event_text").value();
-                        $('#calendar').modal('hide');
-                        $('#calendar').fullCalendar('addEventSource', [{
-                        title: $('#event_text').val(),
-                        start: date,
-                        allDay: true
-                    }]);
-                    });
-                },
-
-                minTime: "05:00:00",
-                maxTime: "22:00:00",
-            height: 830,
-            width: 730,
-        });
+            },
+            editable: true,
+            eventLimit: true // allow "more" link when too many events
 
         });
-    $("#save_event_bt").click(function() {
-        $('#calendar').saveChanges();
-        console.log('a');
+
+        // Bind the dates to datetimepicker.
+        // You should pass the options you need
+        $("#starts-at, #ends-at").datetimepicker();
+
+        // Whenever the user clicks on the "save" button om the dialog
+        $('#save-event').on('click', function() {
+            var title = $('#title').val();
+            if (title) {
+                var eventData = {
+                    title: title,
+                    start: $('#starts-at').val(),
+                    end: $('#ends-at').val()
+                };
+                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+            }
+            $('#calendar').fullCalendar('unselect');
+
+            // Clear modal inputs
+            $('.modal').find('input').val('');
+
+            // hide modal
+            $('.modal').modal('hide');
         });
+    });
 
 
-        // .fullCalendar( ‘removeEvents’ [, idOrFilter ] ) <--to remove events and filter will only remove the one event, not all day
 
-          // eventColor: '#378006'
-         //  eventTextColor:
-        //eventBackgroundColor:
 
-    // var input = document.getElementById("userName");
 
-</script>
+    </script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
 
-<style>
-</style>
 </head>
-
-<title>Shifti</title>
-
-
-<!--<link rel="stylesheet" type="text/css" href="{% static '/style.css' %}">-->
-
 <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}">
-<body>
-<div id="calendar"></div>
+ <body>
 
 
-<!-- Button trigger modal -->
-<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
-  <!--Launch demo modal-->
-<!--</button>-->
+<div id='calendar'></div>
+<div id='datepicker'></div>
 
-<!-- Modal -->
-<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add To Schedule</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input type="text" placeholder="Enter Name" id="event_text"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="save_event_bt" type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Create new event</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">Event title</label>
+                        <input type="text" name="title" id="title" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="starts-at">Starts at</label>
+                        <input type="text" name="starts_at" id="starts-at" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="ends-at">Ends at</label>
+                        <input type="text" name="ends_at" id="ends-at" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-event">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+
+
 
 
 </body>
 </html>
-
-
-
-
