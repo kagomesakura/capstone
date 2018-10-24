@@ -16,38 +16,46 @@
 
         $('#calendar').fullCalendar({
             header: {
-                left: 'prev,next today',
+                left: 'prev,next',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                right: 'prevYear, nextYear, month,agendaWeek,agendaDay'
             },
+            buttonText: {
+               prevYear: new moment().year()-1,
+               nextYear: new moment().year()+1
+           },
+           viewRender: function (view) {
+               var y = moment($('#calendar').fullCalendar('getDate')).year();
+               $(".fc-prevYear-button").text(y-1);
+               $(".fc-nextYear-button").text(y+1);
+           },
             defaultDate: '2016-09-12',
-            navLinks: true, // can click day/week names to navigate views
+            navLinks: true,
             selectable: true,
             selectHelper: true,
             select: function(start, end) {
-                // Display the modal.
-                // You could fill in the start and end fields based on the parameters
                 $('.modal').modal('show');
 
             },
             eventClick: function(event, element) {
-                // Display the modal and set the values to the event values.
                 $('.modal').modal('show');
                 $('.modal').find('#title').val(event.title);
                 $('.modal').find('#starts-at').val(event.start);
                 $('.modal').find('#ends-at').val(event.end);
 
             },
-            editable: true,
-            eventLimit: true // allow "more" link when too many events
+
+               minTime: "05:00:00",
+               maxTime: "22:00:00",
+               editable: true,
+               eventLimit: true
 
         });
 
-        // Bind the dates to datetimepicker.
-        // You should pass the options you need
+
         $("#starts-at, #ends-at").datetimepicker();
 
-        // Whenever the user clicks on the "save" button om the dialog
+
         $('#save-event').on('click', function() {
             var title = $('#title').val();
             if (title) {
@@ -56,14 +64,14 @@
                     start: $('#starts-at').val(),
                     end: $('#ends-at').val()
                 };
-                $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                $('#calendar').fullCalendar('renderEvent', eventData, true);
             }
             $('#calendar').fullCalendar('unselect');
 
             // Clear modal inputs
             $('.modal').find('input').val('');
 
-            // hide modal
+
             $('.modal').modal('hide');
         });
     });
@@ -75,7 +83,7 @@
     </script>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Shifti</title>
 
 </head>
 <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}">
@@ -95,19 +103,19 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12">
-                        <label class="col-xs-4" for="title">Event title</label>
+                        <label class="col-xs-4" for="title">User Name: </label>
                         <input type="text" name="title" id="title" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <label class="col-xs-4" for="starts-at">Starts at</label>
+                        <label class="col-xs-4" for="starts-at">Starting Time: </label>
                         <input type="text" name="starts_at" id="starts-at" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <label class="col-xs-4" for="ends-at">Ends at</label>
+                        <label class="col-xs-4" for="ends-at">Ending Time: </label>
                         <input type="text" name="ends_at" id="ends-at" />
                     </div>
                 </div>
@@ -116,9 +124,9 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="save-event">Save changes</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
 
 
 
