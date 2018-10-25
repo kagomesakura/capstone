@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class ShiftyConfig(AppConfig):
-    name = 'shifty'
+class ShiftiConfig(AppConfig):
+    name = 'shifti'
