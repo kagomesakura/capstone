@@ -19,7 +19,11 @@ def get_days_off(request):
 def save_day_off(request):
     data = json.loads(request.body)
     print(data)
-    user_text = data['user_text']
-    user_item = DayOff(text=user_text)
+    title = data['title']
+    start_date = data['start_date']
+    end_date = data['end_date']
+    user_item = DayOff(text=title)
     user_item.save()
     return HttpResponse('TEST')
+
+
