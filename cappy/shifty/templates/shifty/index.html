@@ -44,91 +44,104 @@
 
         $(document).ready(function () {
 
+
+
+
+            // axios.get("{% url 'shifty:save_day_off' %}").then(function(response) {
+            //     console.log(response.data);
+
+      //
+      // <ul>
+      //   {% for event in eventData %}
+      //       <li>{{ event.title }}, {{event.start}}, {{event.end}}</li>
+      //   {% endfor %}
+      // </ul>
+
+
+
+
+
             $('#calendar').fullCalendar({
-                header: {
-                    left: 'prev,next',
-                    center: 'title',
-                    right: 'prevYear, nextYear, month,agendaWeek,agendaDay'
+
+                    header: {
+                        left: 'prev,next',
+                        center: 'title',
+                        right: 'prevYear, nextYear, month,agendaWeek,agendaDay'
+                    },
+                    buttonText: {
+                        prevYear: new moment().year() - 1,
+                        nextYear: new moment().year() + 1
+                    },
+                    viewRender: function (view) {
+                        var y = moment($('#calendar').fullCalendar('getDate')).year();
+                        $(".fc-prevYear-button").text(y - 1);
+                        $(".fc-nextYear-button").text(y + 1);
+                    },
+                    navLinks: true,
+                    selectable: true,
+                    selectHelper: true,
+                    select: function (start, end) {
+                        $('#title').val('');
+                        $('#starts-at').val(start.format('MM/DD/YYYY'));
+                        $('#ends-at').val(start.format('MM/DD/YYYY'));
+
+                        $("#starts-at").datepicker();
+                        $("#ends-at").datepicker();
+                        $('.modal').modal('show');
+                    },
+                    eventClick: function (event, element) {
+                        $('.modal').modal('show');
+                        $('.modal').find('#title').val(event.title);
+                        $('.modal').find('#starts-at').val(event.start);
+                        $('.modal').find('#ends-at').val(event.end);
+
+                    },
+
+
+                    minTime: "05:00:00",
+                    maxTime: "22:00:00",
+                    editable: true,
+                    eventLimit: true
                 },
-                buttonText: {
-                    prevYear: new moment().year() - 1,
-                    nextYear: new moment().year() + 1
-                },
-                viewRender: function (view) {
-                    var y = moment($('#calendar').fullCalendar('getDate')).year();
-                    $(".fc-prevYear-button").text(y - 1);
-                    $(".fc-nextYear-button").text(y + 1);
-                },
-                // defaultDate: '',
-                navLinks: true,
-                selectable: true,
-                selectHelper: true,
-                select: function (start, end) {
-                    $('#title').val('');
-                    $('#starts-at').val(start.format('MM/DD/YYYY'));
-                    $('#ends-at').val(start.format('MM/DD/YYYY'));
-
-                    $("#starts-at").datepicker();
-                    $("#ends-at").datepicker();
-                    $('.modal').modal('show');
-                },
-                eventClick: function (event, element) {
-                    $('.modal').modal('show');
-                    $('.modal').find('#title').val(event.title);
-                    $('.modal').find('#starts-at').val(event.start);
-                    $('.modal').find('#ends-at').val(event.end);
-
-                },
-
-                minTime: "05:00:00",
-                maxTime: "22:00:00",
-                editable: true,
-                eventLimit: true
-
-            });
 
 
-                // save the data to the database
-                // check the admin panel make sure it's there
+                $('#save-event').on('click', function () {
+                    let title = $('#title').val();
+                    let start_date = $('#starts-at').val()
+                    let end_date = $('#ends-at').val()
+
+                    let csrf_token = '{{ csrf_token }}'
 
 
-
-
-            $('#save-event').on('click', function () {
-                let title = $('#title').val();
-                let start_date = $('#starts-at').val()
-                let end_date = $('#ends-at').val()
-
-                let csrf_token = '{{ csrf_token }}'
-
-
-                axios.post("{% url 'shifty:save_day_off' %}", {
-                    title: title,
-                    start_date: start_date,
-                    end_date: end_date
-                }, {
-                    headers: { 'X-CSRFToken': csrf_token }
-                })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-                if (title) {
-                    var eventData = {
+                    axios.post("{% url 'shifty:save_day_off' %}", {
                         title: title,
-                        start: start_date,
-                        end: end_date,
-                        allDay: true
-                    };
-                    $('#calendar').fullCalendar('renderEvent', eventData, true);
-                }
-                $('#calendar').fullCalendar('unselect');
-                $('.modal').modal('hide');
+                        start_date: start_date,
+                        end_date: end_date
+                    }, {
+                        headers: {'X-CSRFToken': csrf_token}
+                    })
+                        .then(function (response) {
+                            // updateCal();
+                            console.log(response);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }));
+
+                var eventData = {
+                    title: title,
+                    // start: start_date,
+                    // end: end_date,
+                    allDay: true
+                };
+
+
+
+
+                $('#calendar').fullCalendar('renderEvent', eventData, true);
+
             });
-        });
 
 
     </script>

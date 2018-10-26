@@ -6,7 +6,10 @@ import datetime
 
 
 def index(request):
-     return render(request, 'shifty/index.html', {})
+     return render(request, 'shifty/index.html', {
+    # eventData =
+
+     })
 
 
 
@@ -15,7 +18,8 @@ def get_days_off(request):
     output = []
     for day_off in days_off:
         output.append(day_off.to_dict())
-    return JsonResponse({'days_off': output})
+    print(output)
+    return JsonResponse({'events': output})
 
 def save_day_off(request):
     data = json.loads(request.body)
