@@ -12,6 +12,8 @@ class DayOff(models.Model):
 
 
     def to_dict(self):
-        return {'name': self.name, 'start': self.start, 'end': self.end}
+        return {'title': self.name, 'start': self.start.strftime('%Y-%m-%d'), 'end': self.end.strftime('%Y-%m-%d')}
+
+    #(name=title, start=start_date.strftime('%Y-%m-%d'), end=end_date.strftime('%Y-%m-%d'))
 
 

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import DayOff
 from django.http import HttpResponse, JsonResponse
 import json
+import datetime
 
 
 def index(request):
@@ -14,16 +15,16 @@ def get_days_off(request):
     output = []
     for day_off in days_off:
         output.append(day_off.to_dict())
-    return JsonResponse({'days_off': days_off})
+    return JsonResponse({'days_off': output})
 
 def save_day_off(request):
     data = json.loads(request.body)
     print(data)
     title = data['title']
-    start_date = data['start_date']
-    end_date = data['end_date']
-    user_item = DayOff(text=title)
+    start_date = datetime.datetime.strptime(data['start_date'], '%m/%d/%Y')
+    end_date = datetime.datetime.strptime(data['end_date'], '%m/%d/%Y')
+    user_item = DayOff(name=title, start=start_date, end=end_date)
     user_item.save()
-    return HttpResponse('TEST')
+    return HttpResponse('ok')
 
 

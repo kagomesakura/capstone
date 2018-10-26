@@ -87,9 +87,6 @@
 
             });
 
-             // do ajax post using axios to the save_day_off django view
-                // pass the event data as a javascript object
-                // check the terminal to make sure the view successfully received the data
 
                 // save the data to the database
                 // check the admin panel make sure it's there
@@ -102,11 +99,15 @@
                 let start_date = $('#starts-at').val()
                 let end_date = $('#ends-at').val()
 
+                let csrf_token = '{{ csrf_token }}'
 
-                axios.post('shifty/save_day_off') ({
+
+                axios.post("{% url 'shifty:save_day_off' %}", {
                     title: title,
                     start_date: start_date,
                     end_date: end_date
+                }, {
+                    headers: { 'X-CSRFToken': csrf_token }
                 })
                 .then(function (response) {
                     console.log(response);
@@ -114,7 +115,6 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-
 
                 if (title) {
                     var eventData = {
