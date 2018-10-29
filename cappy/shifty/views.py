@@ -7,7 +7,9 @@ import datetime
 
 def index(request):
      return render(request, 'shifty/index.html', {
-    # eventData =
+     # eventData =  Events.object.all()
+     # output = []
+     #
 
      })
 

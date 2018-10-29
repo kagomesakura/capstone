@@ -126,7 +126,20 @@
                         })
                         .catch(function (error) {
                             console.log(error);
-                        });
+                        },
+
+
+                     axios.get("{% url 'shifty:save_day_off' %}", {
+                         title: title,
+                         start_date: start_date,
+                         end_date: end_date
+                     })
+                          .then(function (response) {
+                            console.log(response);
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          }));
                 }));
 
                 var eventData = {
