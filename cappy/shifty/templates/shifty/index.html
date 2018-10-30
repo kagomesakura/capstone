@@ -39,11 +39,13 @@
         #ui-datepicker-div {
             background-color: #111111;
         }
+        .fc-title {
+            color: black;
+        }
     </style>
     <script>
 
         $(document).ready(function () {
-
             $('#calendar').fullCalendar({
 
                     header: {
@@ -86,6 +88,7 @@
                     eventLimit: true
                 },
 
+                // $("#starts-at, #ends-at").datetimepicker(),
 
                 $('#save-event').on('click', function () {
                     let title = $('#title').val();
@@ -103,7 +106,6 @@
                         headers: {'X-CSRFToken': csrf_token}
                     })
                     .then(function (response) {
-                        // updateCal();
                         console.log(response);
                     })
                     .catch(function (error) {
@@ -116,7 +118,7 @@
                         title: title,
                         start: start_date,
                         end: end_date,
-                        allDay: true
+                        allDay: true,
                     };
                     $('#calendar').fullCalendar('renderEvent', eventData, true);
 
@@ -129,12 +131,6 @@
             .then(function (response) {
                 console.log(response.data.events);
             for (let i=0; i<response.data.events.length; ++i) {
-                  // var eventData = {
-                  //       title: response.data.events[i].title,
-                  //       start: ,
-                  //       end: ,
-                  //       allDay: true
-                  //   };
                     $('#calendar').fullCalendar('renderEvent', response.data.events[i], true);
             }})
             .catch(function (error) {
