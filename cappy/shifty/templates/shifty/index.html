@@ -44,23 +44,6 @@
 
         $(document).ready(function () {
 
-
-
-
-            // axios.get("{% url 'shifty:save_day_off' %}").then(function(response) {
-            //     console.log(response.data);
-
-      //
-      // <ul>
-      //   {% for event in eventData %}
-      //       <li>{{ event.title }}, {{event.start}}, {{event.end}}</li>
-      //   {% endfor %}
-      // </ul>
-
-
-
-
-
             $('#calendar').fullCalendar({
 
                     header: {
@@ -97,7 +80,6 @@
 
                     },
 
-
                     minTime: "05:00:00",
                     maxTime: "22:00:00",
                     editable: true,
@@ -120,41 +102,44 @@
                     }, {
                         headers: {'X-CSRFToken': csrf_token}
                     })
-                        .then(function (response) {
-                            // updateCal();
-                            console.log(response);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        },
+                    .then(function (response) {
+                        // updateCal();
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
 
 
-                     axios.get("{% url 'shifty:save_day_off' %}", {
-                         title: title,
-                         start_date: start_date,
-                         end_date: end_date
-                     })
-                          .then(function (response) {
-                            console.log(response);
-                          })
-                          .catch(function (error) {
-                            console.log(error);
-                          }));
+                    // add event to calendar
+                    var eventData = {
+                        title: title,
+                        start: start_date,
+                        end: end_date,
+                        allDay: true
+                    };
+                    $('#calendar').fullCalendar('renderEvent', eventData, true);
+
+                    $('.modal').modal('hide');
+
                 }));
 
-                var eventData = {
-                    title: title,
-                    // start: start_date,
-                    // end: end_date,
-                    allDay: true
-                };
 
-
-
-
-                $('#calendar').fullCalendar('renderEvent', eventData, true);
-
-            });
+            axios.get("{% url 'shifty:get_days_off' %}")
+            .then(function (response) {
+                console.log(response.data.events);
+            for (let i=0; i<response.data.events.length; ++i) {
+                  // var eventData = {
+                  //       title: response.data.events[i].title,
+                  //       start: ,
+                  //       end: ,
+                  //       allDay: true
+                  //   };
+                    $('#calendar').fullCalendar('renderEvent', response.data.events[i], true);
+            }})
+            .catch(function (error) {
+                console.log(error);
+            })});
 
 
     </script>

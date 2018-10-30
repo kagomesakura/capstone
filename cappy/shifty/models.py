@@ -13,10 +13,6 @@ class DayOff(models.Model):
 
 
     def to_dict(self):
-        return {'id': self.id, 'title': self.name, 'start': self.start.strftime('%Y-%m-%d') + "T01:00:00", 'end': self.end.strftime('%Y-%m-%d') + "T01:00:00"}
-
-    #allDay needs added to end of string
-
-    #(name=title, start=start_date.strftime('%Y-%m-%d'), end=end_date.strftime('%Y-%m-%d'))
+        return {'id': self.id, 'title': self.name, 'start': self.start.strftime('%Y-%m-%d'), 'end': self.end.strftime('%Y-%m-%d')}
 
 

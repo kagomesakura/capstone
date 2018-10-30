@@ -7,13 +7,8 @@ import datetime
 
 def index(request):
      return render(request, 'shifty/index.html', {
-     # eventData =  Events.object.all()
-     # output = []
-     #
 
      })
-
-
 
 def get_days_off(request):
     days_off = DayOff.objects.all()
