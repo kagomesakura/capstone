@@ -3,10 +3,16 @@ from .models import DayOff
 from django.http import HttpResponse, JsonResponse
 import json
 import datetime
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
      return render(request, 'shifty/index.html', {
+
+     })
+
+def index2(request):
+     return render(request, 'shifty/index2.html', {
 
      })
 
@@ -28,4 +34,17 @@ def save_day_off(request):
     user_item.save()
     return HttpResponse('ok')
 
+def mylogin(request):
+    # retrieve the variables from the form submission
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # redirect to index.html
+    else:
+        # return 'invalid login' error message
 
+        def logout_view(request):
+            logout(request)
+            # redirect to login page (refresh?)
