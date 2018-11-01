@@ -43,6 +43,14 @@
         .fc-title {
             color: black;
         }
+        /*.container {*/
+            /*display: flex; !* or inline-flex *!*/
+            /*flex-direction: row;*/
+            /*justify-content: flex-start*/
+        /*}*/
+        /*.item {*/
+            /*flex-grow: <number>; !* default 0 *!*/
+        /*}*/
     </style>
     <script>
 
@@ -131,7 +139,6 @@
 
             axios.get("{% url 'shifty:get_days_off' %}")
             .then(function (response) {
-                //console.log(response.data.events);
                 for (let i=0; i<response.data.events.length; ++i) {
                     $('#calendar').fullCalendar('renderEvent', response.data.events[i], true);
                 }
@@ -150,7 +157,18 @@
             .catch(function (error) {
                 console.log(error);
             })
-        })
+            axios.get("{% url 'shifty:get_days_off' %}")
+                .then(function(response) {
+                    console.log(response.data.events)
+                    $("#off_list").html("<ul>")
+                    for (let i = 0; i < response.data.events.length; ++i) {
+                        $("#off_list").append("<li>" + response.data.events[i].title + response.data.events[i].start + response.data.events[i].end + "</li>")
+                    }
+                    $("#off_list").append("<ul>")
+                })
+
+            });
+
 
 
     </script>
@@ -161,20 +179,63 @@
     </head>
     <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}">
 
-
 <body>
 
 <body>
     <div class="page-header">
-        <h1>Days Busy</h1>
+        <h1></h1>
     </div>
     <div class="content container">
         <div class="row">
             <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
+            <!--{% block content %}-->
+            <!--{% endblock %}-->
                 <div id="calendar"></div>
                 <div id="datepicker"></div>
+                <div class="header">
+                    <h1> Days Off </h1>
+                    <div id="off_list">
+                </div>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Create new event</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="title">User Name: </label>
+                        <input type="text" name="title" id="title"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="starts-at">Starting Day: </label>
+                        <input type="datetime" placeholder="MM/DD/YYYY" name="starts_at" id="starts-at"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="col-xs-4" for="ends-at">Ending Day: </label>
+                        <input type="datetime" placeholder="MM/DD/YYYY" name="ends_at" id="ends-at"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-event">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
             </div>
         </div>
     </div>
