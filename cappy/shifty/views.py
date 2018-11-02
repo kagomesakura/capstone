@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from .models import DayOff
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 import json
 import datetime
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 def index(request):
      return render(request, 'shifty/index.html', {
@@ -34,17 +35,37 @@ def save_day_off(request):
     user_item.save()
     return HttpResponse('ok')
 
-def mylogin(request):
-    # retrieve the variables from the form submission
+
+
+@login_required
+def index(request):
+    print(request.user.username)
+    return render(request, 'shifty/index.html', {})
+
+
+def register_user(request):
+    username = request.POST['username']
+    email = request.POST['email']
+    password = request.POST['password']
+    user = User.objects.create_user(username, email, password)
+    login(request, user)
+    return HttpResponseRedirect(reverse('shifty:index'))
+
+
+def login_user(request):
     username = request.POST['username']
     password = request.POST['password']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        # redirect to index.html
-    else:
-        # return 'invalid login' error message
+        return HttpResponseRedirect(reverse('shifty:index'))
+    return HttpResponseRedirect(reverse('shifty:register'))
 
-        def logout_view(request):
-            logout(request)
-            # redirect to login page (refresh?)
+
+def register(request):
+    return render(request, 'shifty/register.html', {})
+
+
+def logout_user(request):
+    logout(request)
+    return render(request, 'shifty/register.html', {})

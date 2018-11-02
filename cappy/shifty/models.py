@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # this is the information that will be saved in the database
 
 class DayOff(models.Model):
