@@ -49,7 +49,7 @@ def register_user(request):
     password = request.POST['password']
     user = User.objects.create_user(username, email, password)
     login(request, user)
-    return HttpResponseRedirect(reverse('shifty:index'))
+    return HttpResponseRedirect(reverse('shifty:index2'))
 
 
 def login_user(request):
@@ -58,14 +58,14 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponseRedirect(reverse('shifty:index'))
+        return HttpResponseRedirect(reverse('shifty:index2'))
     return HttpResponseRedirect(reverse('shifty:register'))
 
 
 def register(request):
-    return render(request, 'shifty/register.html', {})
+    return render(request, 'shifty/index2.html', {})
 
 
 def logout_user(request):
     logout(request)
-    return render(request, 'shifty/register.html', {})
+    return render(request, 'shifty/index.html', {})
