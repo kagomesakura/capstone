@@ -43,15 +43,21 @@
         .fc-title {
             color: black;
         }
-        /*.container {*/
-            /*display: flex; !* or inline-flex *!*/
-            /*flex-direction: row;*/
-            /*justify-content: flex-start*/
-        /*}*/
-        /*.item {*/
-            /*flex-grow: <number>; !* default 0 *!*/
-        /*}*/
+         .row {
+            display:flex;
+            flex-direction:row;
+        }
+        aside {
+            margin-left: 3%;
+            width: 30%;
+        }
+       .content-container{
+           width: 90%;
+           margin-top: 4%;
+           margin-left: 5%;
+       }
     </style>
+    <body>
     <script>
 
         $(document).ready(function () {
@@ -95,7 +101,7 @@
                 maxTime: "22:00:00",
                 editable: true,
                 eventLimit: true
-            })
+            });
 
 
             // $("#starts-at, #ends-at").datetimepicker(),
@@ -179,23 +185,31 @@
     </head>
     <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}">
 
-<body>
-
-<body>
+    <!--<div id="maindiv">-->
     <div class="page-header">
         <h1></h1>
     </div>
-    <div class="content container">
+    <div class="content-container">
         <div class="row">
             <div class="col-md-8">
             <!--{% block content %}-->
             <!--{% endblock %}-->
                 <div id="calendar"></div>
                 <div id="datepicker"></div>
+                                </div>
+
+                <aside>
                 <div class="header">
                     <h1> Days Off </h1>
                     <div id="off_list">
+                    </div>
+                    </div>
+                </aside>
+                            </div>
                 </div>
+                        </div>
+
+
 
 
 
