@@ -7,12 +7,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-def index(request):
-     return render(request, 'shifty/index.html', {})
+def signin(request):
+     return render(request, 'shifty/signin.html', {})
 
 @login_required
-def index2(request):
-     return render(request, 'shifty/index2.html', {})
+def calendar(request):
+     return render(request, 'shifty/calendar.html', {})
 
 def get_days_off(request):
     days_off = DayOff.objects.all()
@@ -35,16 +35,20 @@ def save_day_off(request):
 
 
 def index(request):
-    return render(request, 'shifty/index.html', {})
+    return render(request, 'shifty/signin.html', {})
 
 
 def register_user(request):
-    username = request.POST['username']
-    email = request.POST['email']
-    password = request.POST['password']
-    user = User.objects.create_user(username, email, password)
-    login(request, user)
-    return HttpResponseRedirect(reverse('shifty:index2'))
+    try:
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        user = User.objects.create_user(username, email, password)
+        login(request, user)
+        return HttpResponseRedirect(reverse('shifty:calendar'))
+    except ValueError:
+        return HttpResponseRedirect(reverse('shifty:signin'))
+
 
 
 def login_user(request):
@@ -53,10 +57,10 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponseRedirect(reverse('shifty:index2'))
-    return HttpResponseRedirect(reverse('shifty:index'))
+        return HttpResponseRedirect(reverse('shifty:calendar'))
+    return HttpResponseRedirect(reverse('shifty:signin'))
 
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse('shifty:index'))
+    return HttpResponseRedirect(reverse('shifty:signin'))

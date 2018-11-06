@@ -52,13 +52,16 @@
 
         aside {
             margin-left: 3%;
-            width: 30%;
+            width: 200px;
         }
 
         .content-container {
             width: 90%;
             margin-top: 4%;
             margin-left: 5%;
+        }
+        .header{
+            width: 200px;
         }
     </style>
 
@@ -144,6 +147,23 @@
 
             });
 
+            // https://fullcalendar.io/docs/eventDrop this function is triggered when moving dates on calendar
+            // $('#calendar').fullCalendar({
+            //   events: [
+            //     // events here
+            //   ],
+            //   editable: true,
+            //   eventDrop: function(event, delta, revertFunc) {
+            //
+            //     alert(event.title + " was dropped on " + event.start.format());
+            //
+            //     if (!confirm("Are you sure about this change?")) {
+            //       revertFunc();
+            //     }
+            //
+            //   }
+            // });
+
             // get list from database to appear in calendar on page load
             axios.get("{% url 'shifty:get_days_off' %}")
                 .then(function (response) {
@@ -203,6 +223,7 @@
                 <h1> Days Off </h1>
                 <div id="off_list">
             </div>
+                <button class='btn btn-primary' id="logout" onclick="log_out()">Log Out</button>
         </aside>
     </div>
 </div>
@@ -238,7 +259,6 @@
         </div>
     </div>
 </div>
-<button class='btn btn-primary' id="logout" onclick="log_out()">Log Out</button>
 
 
 
