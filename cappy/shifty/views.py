@@ -8,14 +8,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 def index(request):
-     return render(request, 'shifty/index.html', {
+     return render(request, 'shifty/index.html', {})
 
-     })
-
+@login_required
 def index2(request):
-     return render(request, 'shifty/index2.html', {
-
-     })
+     return render(request, 'shifty/index2.html', {})
 
 def get_days_off(request):
     days_off = DayOff.objects.all()
@@ -37,9 +34,7 @@ def save_day_off(request):
 
 
 
-@login_required
 def index(request):
-    print(request.user.username)
     return render(request, 'shifty/index.html', {})
 
 
@@ -59,13 +54,9 @@ def login_user(request):
     if user is not None:
         login(request, user)
         return HttpResponseRedirect(reverse('shifty:index2'))
-    return HttpResponseRedirect(reverse('shifty:register'))
-
-
-def register(request):
-    return render(request, 'shifty/index2.html', {})
+    return HttpResponseRedirect(reverse('shifty:index'))
 
 
 def logout_user(request):
     logout(request)
-    return render(request, 'shifty/index.html', {})
+    return HttpResponseRedirect(reverse('shifty:index'))
