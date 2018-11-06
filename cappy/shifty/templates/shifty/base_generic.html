@@ -108,8 +108,6 @@
             });
 
 
-            // $("#starts-at, #ends-at").datetimepicker(),
-
             $('#save-event').on('click', function () {
                 let title = $('#title').val();
                 let start_date = $('#starts-at').val()
@@ -178,6 +176,10 @@
             //     })
 
         });
+        function log_out() {
+            console.log('a');
+            location.href = "{% url 'shifty:logout_user' %}";
+        }
 
     </script>
 
@@ -218,12 +220,6 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12">
-                        <label class="col-xs-4" for="title">User Name: </label>
-                        <input type="text" name="title" id="title"/>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
                         <label class="col-xs-4" for="starts-at">Starting Day: </label>
                         <input type="datetime" placeholder="MM/DD/YYYY" name="starts_at" id="starts-at"/>
                     </div>
@@ -242,6 +238,8 @@
         </div>
     </div>
 </div>
+<button class='btn btn-primary' id="logout" onclick="log_out()">Log Out</button>
+
 
 
 </body>

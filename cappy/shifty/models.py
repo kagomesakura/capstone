@@ -1,19 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import User
+# from django.conf import settings
 
 
 # this is the information that will be saved in the database
 
 class DayOff(models.Model):
-    name = models.CharField(max_length=20)
-    start = models.DateField(max_length=20)
-    end = models.DateField(max_length=20)
-    # all day
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    all_day = models.BooleanField()
 
     def __str__(self):
-        return f'{self.name} - {self.start} - {self.end}'
+        return f'{self.user.username} - {self.start} - {self.end}'
 
 
     def to_dict(self):
-        return {'id': self.id, 'title': self.name, 'start': self.start.strftime('%Y-%m-%d'), 'end': self.end.strftime('%Y-%m-%d')}
+        return {'id': self.id, 'title': self.user.username, 'start': self.start.strftime('%Y-%m-%d'), 'end': self.end.strftime('%Y-%m-%d')}
 
 
