@@ -98,7 +98,7 @@
                 },
                 eventClick: function (event, element) {
                     $('.modal').modal('show');
-                    $('.modal').find('#title').val(event.title);
+                    $('.modal').find('#username').val(event.username);
                     $('.modal').find('#starts-at').val(event.start);
                     $('.modal').find('#ends-at').val(event.end);
 
@@ -110,9 +110,9 @@
                 eventLimit: true
             });
 
-
+            //let username places logged in username  in database and will place it in the calendar w/out having to enter a second text field
             $('#save-event').on('click', function () {
-                let title = $('#title').val();
+                let username = '{{user.username}}'
                 let start_date = $('#starts-at').val()
                 let end_date = $('#ends-at').val()
 
@@ -120,23 +120,22 @@
 
                 // save events to calendar
                 axios.post("{% url 'shifty:save_day_off' %}", {
-                    title: title,
                     start_date: start_date,
                     end_date: end_date
                 }, {
                     headers: {'X-CSRFToken': csrf_token}
                 })
-                    .then(function (response) {
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
 
                 // add event to calendar via modal
                 var eventData = {
-                    title: title,
+                    user: username,
                     start: start_date,
                     end: end_date,
                     allDay: true,
@@ -150,12 +149,12 @@
             // https://fullcalendar.io/docs/eventDrop this function is triggered when moving dates on calendar
             // $('#calendar').fullCalendar({
             //   events: [
-            //     // events here
+                // events here
             //   ],
             //   editable: true,
             //   eventDrop: function(event, delta, revertFunc) {
             //
-            //     alert(event.title + " was dropped on " + event.start.format());
+            //     alert(event.username + " was dropped on " + event.start.format());
             //
             //     if (!confirm("Are you sure about this change?")) {
             //       revertFunc();
@@ -176,13 +175,46 @@
                     for (let i = 0; i < response.data.events.length; ++i) {
                         let li = document.createElement('li')
                         // format the date to look better
+                        // li.innerText = response.data.events[i].title + " " + " " + moment().format("MMM Do") + " - " + moment().format("Do");
                         li.innerText = response.data.events[i].title + response.data.events[i].start + response.data.events[i].end;
                         ul.appendChild(li)
                     }
                 })
                 .catch(function (error) {
                     console.log(error);
-                })
+                });
+
+
+            // <table>
+            // {% for events in eventData %}
+            // <tr>
+            //     <td>Name</td>
+            //     <td>Start</td>
+            //     <td>End</td>
+            //     </td>
+            // </tr>
+            // {% endfor %}
+            // </table>
+
+
+
+        // $(document).ready(function() {
+        //     $('#calendar').DataTable( {
+        //         data: eventData,
+        //         columns: [
+        //             { title: "Name" },
+        //             { title: "Start Day" },
+        //             { title: "End Day" }
+        //         ]
+        //     });
+        //
+
+
+
+
+
+
+
             // to add holidays to calendar
             // axios.get('https://www.googleapis.com/calendar/v3/calendars/en.uk%40holiday.calendar.google.com/events?key=AIzaSyBzz_Zfd65IMUl0Vo2R0fuWYcL1aGAtCgM')
             //     .then(function (response) {
