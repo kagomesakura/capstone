@@ -63,6 +63,10 @@
         .header{
             width: 200px;
         }
+        th, td {
+            padding: 5px;
+            text-align: left;
+}
     </style>
 
     <script>
@@ -135,7 +139,7 @@
 
                 // add event to calendar via modal
                 var eventData = {
-                    user: username,
+                    title: username,
                     start: start_date,
                     end: end_date,
                     allDay: true,
@@ -171,43 +175,35 @@
                     }
 
                     // building list of day off on the right
-                    let ul = document.querySelector('#off_list')
-                    for (let i = 0; i < response.data.events.length; ++i) {
-                        let li = document.createElement('li')
-                        // format the date to look better
-                        // li.innerText = response.data.events[i].title + " " + " " + moment().format("MMM Do") + " - " + moment().format("Do");
-                        li.innerText = response.data.events[i].title + response.data.events[i].start + response.data.events[i].end;
-                        ul.appendChild(li)
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    //     let ul = document.querySelector('#off_list')
+                    //     for (let i = 0; i < response.data.events.length; ++i) {
+                    //         let li = document.createElement('li')
+                    //         // format the date to look better
+                    //         // li.innerText = response.data.events[i].title + " " + " " + moment().format("MMM Do") + " - " + moment().format("Do");
+                    //         li.innerText = response.data.events[i].title + response.data.events[i].start + response.data.events[i].end;
+                    //         ul.appendChild(li)
+                    //     }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
 
 
-            // <table>
-            // {% for events in eventData %}
-            // <tr>
-            //     <td>Name</td>
-            //     <td>Start</td>
-            //     <td>End</td>
-            //     </td>
-            // </tr>
-            // {% endfor %}
-            // </table>
+                    // <table>
+                    //     <tr>
+                    //         <th>Name</th>
+                    //         <th>Start</th>
+                    //         <th>End</th>
+                    //     </tr>
+                    //     {% for events in eventData %}
+                    //     <tr>
+                    //         <td>{{events.user}} </td>
+                    //         <td>{{events.start}} </td>
+                    //         <td>{{events.end}} </td>
+                    //     </tr>
+                    //     {% endfor %}
+                    // </table>
 
-
-
-        // $(document).ready(function() {
-        //     $('#calendar').DataTable( {
-        //         data: eventData,
-        //         columns: [
-        //             { title: "Name" },
-        //             { title: "Start Day" },
-        //             { title: "End Day" }
-        //         ]
-        //     });
-        //
 
 
 
@@ -244,8 +240,6 @@
 <div class="content-container">
     <div class="row">
         <div class="col-md-8">
-            <!--{% block content %}-->
-            <!--{% endblock %}-->
             <div id="calendar"></div>
             <div id="datepicker"></div>
         </div>
@@ -253,8 +247,25 @@
         <aside>
             <div class="header">
                 <h1> Days Off </h1>
+                <br>
                 <div id="off_list">
             </div>
+
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start</th>
+                            <th>End</th>
+                        </tr>
+                        {% for events in event_pie %}
+                        <tr>
+                            <td>{{events.title}} </td>
+                            <td>{{events.start}} </td>
+                            <td>{{events.end}} </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <br>
                 <button class='btn btn-primary' id="logout" onclick="log_out()">Log Out</button>
         </aside>
     </div>

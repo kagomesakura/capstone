@@ -12,7 +12,12 @@ def signin(request):
 
 @login_required
 def calendar(request):
-     return render(request, 'shifty/calendar.html', {})
+    days_off = DayOff.objects.all()
+    output = []
+    for day_off in days_off:
+        output.append(day_off.to_pretty_dict())
+    print(output)
+    return render(request, 'shifty/calendar.html', {'event_pie': output})
 
 @login_required
 def get_days_off(request):
@@ -26,8 +31,8 @@ def get_days_off(request):
 @login_required
 def save_day_off(request):
     data = json.loads(request.body)
-    start_date = datetime.datetime.strptime(data['start_date'], '%b/%d/%y')
-    end_date = datetime.datetime.strptime(data['end_date'], '%b/%d/%y')
+    start_date = datetime.datetime.strptime(data['start_date'], '%m/%d/%Y')
+    end_date = datetime.datetime.strptime(data['end_date'], '%m/%d/%Y')
     user_item = DayOff(user=request.user, start=start_date, end=end_date, all_day=False)
     user_item.save()
     return HttpResponse('ok')
