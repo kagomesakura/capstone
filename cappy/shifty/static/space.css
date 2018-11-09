@@ -42,6 +42,33 @@
   --font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+
+.ui-datepicker-prev {
+    background-color: #ffffff;
+    margin-right: 10%;
+
+}
+
+.ui-datepicker-prev:hover {
+    cursor: pointer;
+
+}
+
+.ui-datepicker-next {
+    background-color: #ffffff;
+    margin-right: 10%;
+
+}
+
+.ui-datepicker-next:hover {
+    cursor: pointer;
+
+}
+
+#ui-datepicker-div {
+    background-color: #ffffff;
+}
+
 /*tr:nth-child(even) {*/
 /*background-color: #3b72b5;*/
 /*}*/
@@ -61,12 +88,12 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 .fc-event, .fc-event-dot {
-    background-color: #3b72b5;
+    background-color: #067020;
     border: none;
 }
 .fc-content {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#7f7fff));
-  background-image: linear-gradient(#067020, #509a62 50%, #7f7fff);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
+  background-image: linear-gradient(#067020, #509a62 50%, #200670);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
@@ -190,14 +217,14 @@ sup {
 }
 
 a {
-  color: #3399F3;
+  color: #067020;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
 
 a:hover {
-  color: #0c73cd;
+  color: #067020;
   text-decoration: underline;
 }
 

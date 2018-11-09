@@ -42,6 +42,32 @@
   --font-family-sans-serif: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+.ui-datepicker-prev {
+    background-color: #B58900;
+    margin-right: 10%;
+
+}
+
+.ui-datepicker-prev:hover {
+    cursor: pointer;
+
+}
+
+.ui-datepicker-next {
+    background-color: #B58900;
+    margin-right: 10%;
+
+}
+
+.ui-datepicker-next:hover {
+    cursor: pointer;
+
+}
+
+#ui-datepicker-div {
+    background-color: #002B36;
+}
+
 
 *,
 *::before,
