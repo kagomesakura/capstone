@@ -43,7 +43,7 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .ui-datepicker-prev {
-    background-color: #B58900;
+    background-color: rgba(181, 137, 0, 0.5));
     margin-right: 10%;
 
 }
@@ -54,7 +54,7 @@
 }
 
 .ui-datepicker-next {
-    background-color: #B58900;
+    background-color: rgba(181, 137, 0, 0.5);
     margin-right: 10%;
 
 }
