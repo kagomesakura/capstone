@@ -58,7 +58,9 @@ html {
   -ms-overflow-style: scrollbar;
   -webkit-tap-highlight-color: transparent;
 }
-
+tr:nth-child(even) {
+    background-color: rgba(0, 58, 64, 0.76);
+}
 
 @-ms-viewport {
   width: device-width;
@@ -225,8 +227,9 @@ svg {
   vertical-align: middle;
 }
 
-table {
+table, tbody {
   border-collapse: collapse;
+  width: 300px;
 }
 
 caption {

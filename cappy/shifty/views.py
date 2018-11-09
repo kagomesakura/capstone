@@ -7,6 +7,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
+from django.views.decorators.cache import never_cache
+
 def signin(request):
      return render(request, 'shifty/signin.html', {})
 
@@ -38,7 +40,7 @@ def save_day_off(request):
     return HttpResponse('ok')
 
 
-
+@never_cache
 def index(request):
     return render(request, 'shifty/signin.html', {})
 
