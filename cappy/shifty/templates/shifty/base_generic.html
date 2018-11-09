@@ -16,7 +16,7 @@
           media="print"/>
     <style>
         .ui-datepicker-prev {
-            background-color: teal;
+            background-color: #B58900;
             margin-right: 10%;
 
         }
@@ -27,7 +27,7 @@
         }
 
         .ui-datepicker-next {
-            background-color: teal;
+            background-color: #B58900;
             margin-right: 10%;
 
         }
@@ -38,13 +38,12 @@
         }
 
         #ui-datepicker-div {
-            background-color: #111111;
+            background-color: #002B36;
         }
 
         .fc-title {
-            color: black;
+            color: white;
         }
-
         .row {
             display: flex;
             flex-direction: row;
@@ -54,11 +53,17 @@
             margin-left: 3%;
             width: 200px;
         }
-
         .content-container {
             width: 90%;
             margin-top: 4%;
             margin-left: 5%;
+        }
+        .event-container {
+            color: black;
+        }
+        .fc-event, .fc-event-dot {
+            background-color: #B58900;
+            border: none;
         }
         .header{
             width: 200px;
@@ -70,6 +75,14 @@
         logo {
             background-image: url("shiftilogo.png");
         }
+        img {
+        display: block;
+        width:150px;
+        padding-top: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+    }
     </style>
 
     <script>
@@ -192,28 +205,6 @@
                     });
 
 
-                    // <table>
-                    //     <tr>
-                    //         <th>Name</th>
-                    //         <th>Start</th>
-                    //         <th>End</th>
-                    //     </tr>
-                    //     {% for events in eventData %}
-                    //     <tr>
-                    //         <td>{{events.user}} </td>
-                    //         <td>{{events.start}} </td>
-                    //         <td>{{events.end}} </td>
-                    //     </tr>
-                    //     {% endfor %}
-                    // </table>
-
-
-
-
-
-
-
-
             // to add holidays to calendar
             // axios.get('https://www.googleapis.com/calendar/v3/calendars/en.uk%40holiday.calendar.google.com/events?key=AIzaSyBzz_Zfd65IMUl0Vo2R0fuWYcL1aGAtCgM')
             //     .then(function (response) {
@@ -270,10 +261,13 @@
                     </table>
                     <br>
                 <button class='btn btn-primary' id="logout" onclick="log_out()">Log Out</button>
+                <img src="{% static 'shifty/shiftilogo.png' %}"/>
         </aside>
-    </div>
 </div>
 </div>
+
+</div>
+
 
 
 <div class="modal fade" tabindex="-1" role="dialog">
