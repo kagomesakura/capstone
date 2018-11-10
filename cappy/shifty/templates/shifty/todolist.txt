@@ -17,3 +17,12 @@ line 1915 nth-child & 45z
 
 green  #067020
 
+
+
+
+
+
+<body>
+<a href=”#” onclick=”setActiveStyleSheet(‘default’); return false;”>Change style to default</a>
+<a href=”#” onclick=”setActiveStyleSheet(‘alternate’); return false;”>Change style to alternate</a>
+</body>

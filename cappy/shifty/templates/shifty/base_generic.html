@@ -11,6 +11,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <script type="text/javascript" src="/scripts/styleswitcher.js"></script>
+
+    <!--<link rel=”stylesheet” type=”text/css” href=”cappy/shifty/static/bstheme.css” title=”default”/>-->
+    <!--<link rel=”alternate stylesheet” type=”text/css” href="cappy/shifty/static/space.css” title=”alternate”/>-->
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet"
           media="print"/>
@@ -228,7 +233,7 @@
 
     <!--<link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}" title="dark">-->
 
-     <link rel="alternative stylesheet" type="text/css" href="{% static '/bstheme.css' %}" title="dark">
+     <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}" title="dark">
     <link rel="alternate stylesheet" type="text/css" href="{% static '/space.css' %}" title="light">
 
 
@@ -307,6 +312,9 @@
         </div>
     </div>
 </div>
+<button class='btn btn-primary' a href=”cappy/shifty/static/bstheme.css” onclick=”setActiveStyleSheet(‘stylesheet’); return false;”>Default Theme</a></button>
+<button class='btn btn-primary' a href=”cappy/shifty/static/space.css” onclick=”setActiveStyleSheet(‘alternative stylesheet’); return false;”>Light Theme</a></button>
+
 
 
 
