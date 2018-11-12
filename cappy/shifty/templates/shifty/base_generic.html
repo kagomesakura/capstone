@@ -11,41 +11,29 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-    <script type="text/javascript" src="/scripts/styleswitcher.js"></script>
-
-    <!--<link rel=”stylesheet” type=”text/css” href=”cappy/shifty/static/bstheme.css” title=”default”/>-->
-    <!--<link rel=”alternate stylesheet” type=”text/css” href="cappy/shifty/static/space.css” title=”alternate”/>-->
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet"
           media="print"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'shifty/bstheme.css' %}" title="dark">
     <style>
         /*.ui-datepicker-prev {*/
             /*background-color: #B58900;*/
             /*margin-right: 10%;*/
-
         /*}*/
-
         /*.ui-datepicker-prev:hover {*/
             /*cursor: pointer;*/
-
         /*}*/
-
         /*.ui-datepicker-next {*/
             /*background-color: #B58900;*/
             /*margin-right: 10%;*/
-
         /*}*/
-
         /*.ui-datepicker-next:hover {*/
             /*cursor: pointer;*/
-
         /*}*/
-
         /*#ui-datepicker-div {*/
             /*background-color: #002B36;*/
         /*}*/
-
         .fc-title {
             color: white;
         }
@@ -53,7 +41,6 @@
             display: flex;
             flex-direction: row;
         }
-
         aside {
             margin-left: 3%;
             width: 300px;
@@ -88,14 +75,11 @@
         margin-right: auto;
         /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
     }
-
     </style>
 
     <script>
-
         $(document).ready(function () {
             $('#calendar').fullCalendar({
-
                 header: {
                     left: 'prev,next',
                     center: 'title',
@@ -117,7 +101,6 @@
                     $('#title').val('');
                     $('#starts-at').val(start.format('MM/DD/YYYY'));
                     $('#ends-at').val(start.format('MM/DD/YYYY'));
-
                     $("#starts-at").datepicker();
                     $("#ends-at").datepicker();
                     $('.modal').modal('show');
@@ -127,7 +110,6 @@
                     $('.modal').find('#username').val(event.username);
                     $('.modal').find('#starts-at').val(event.start);
                     $('.modal').find('#ends-at').val(event.end);
-
                 },
                 // create shift hours
                 minTime: "05:00:00",
@@ -135,15 +117,12 @@
                 editable: true,
                 eventLimit: true
             });
-
             //let username places logged in username  in database and will place it in the calendar w/out having to enter a second text field
             $('#save-event').on('click', function () {
                 let username = '{{user.username}}'
                 let start_date = $('#starts-at').val()
                 let end_date = $('#ends-at').val()
-
                 let csrf_token = '{{ csrf_token }}'
-
                 // save events to calendar
                 axios.post("{% url 'shifty:save_day_off' %}", {
                     start_date: start_date,
@@ -157,8 +136,6 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-
-
                 // add event to calendar via modal
                 var eventData = {
                     title: username,
@@ -167,11 +144,8 @@
                     allDay: true,
                 };
                 $('#calendar').fullCalendar('renderEvent', eventData, true);
-
                 $('.modal').modal('hide');
-
             });
-
             // https://fullcalendar.io/docs/eventDrop this function is triggered when moving dates on calendar
             // $('#calendar').fullCalendar({
             //   events: [
@@ -188,14 +162,12 @@
             //
             //   }
             // });
-
             // get list from database to appear in calendar on page load
             axios.get("{% url 'shifty:get_days_off' %}")
                 .then(function (response) {
                     for (let i = 0; i < response.data.events.length; ++i) {
                         $('#calendar').fullCalendar('renderEvent', response.data.events[i], true);
                     }
-
                     // building list of day off on the right
                     //     let ul = document.querySelector('#off_list')
                     //     for (let i = 0; i < response.data.events.length; ++i) {
@@ -209,8 +181,6 @@
                     .catch(function (error) {
                         console.log(error);
                     });
-
-
             // to add holidays to calendar
             // axios.get('https://www.googleapis.com/calendar/v3/calendars/en.uk%40holiday.calendar.google.com/events?key=AIzaSyBzz_Zfd65IMUl0Vo2R0fuWYcL1aGAtCgM')
             //     .then(function (response) {
@@ -222,19 +192,13 @@
             //     .catch(function (error) {
             //         console.log(error);
             //     })
-
         });
         function log_out() {
             console.log('a');
             location.href = "{% url 'shifty:logout_user' %}";
         }
-
     </script>
 
-    <!--<link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}" title="dark">-->
-
-     <link rel="stylesheet" type="text/css" href="{% static '/bstheme.css' %}" title="dark">
-    <link rel="alternate stylesheet" type="text/css" href="{% static '/space.css' %}" title="light">
 
 
 
@@ -312,8 +276,8 @@
         </div>
     </div>
 </div>
-<button class='btn btn-primary' a href=”cappy/shifty/static/bstheme.css” onclick=”setActiveStyleSheet(‘stylesheet’); return false;”>Default Theme</a></button>
-<button class='btn btn-primary' a href=”cappy/shifty/static/space.css” onclick=”setActiveStyleSheet(‘alternative stylesheet’); return false;”>Light Theme</a></button>
+<!--<button class='btn btn-primary' a href=”cappy/shifty/static/bstheme.css” onclick=”setActiveStyleSheet(‘stylesheet’); return false;”>Default Theme</a></button>-->
+<!--<button class='btn btn-primary' a href=”cappy/shifty/static/space.css” onclick=”setActiveStyleSheet(‘alternative stylesheet’); return false;”>Light Theme</a></button>-->
 
 
 
