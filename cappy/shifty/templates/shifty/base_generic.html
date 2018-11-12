@@ -15,70 +15,94 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet"
           media="print"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'shifty/bstheme.css' %}" title="dark">
+    <link rel="stylesheet" type="text/css" href="{% static 'shifty/bstheme.css' %}" title="default">
+    <link rel="stylesheet" type="text/css" href="{% static 'shifty/space.css' %}" title="alternate">
+    <script type="text/javascript" src="{% static 'shifty/styleswitcher.js' %}"></script>
+
     <style>
         /*.ui-datepicker-prev {*/
-            /*background-color: #B58900;*/
-            /*margin-right: 10%;*/
+        /*background-color: #B58900;*/
+        /*margin-right: 10%;*/
         /*}*/
         /*.ui-datepicker-prev:hover {*/
-            /*cursor: pointer;*/
+        /*cursor: pointer;*/
         /*}*/
         /*.ui-datepicker-next {*/
-            /*background-color: #B58900;*/
-            /*margin-right: 10%;*/
+        /*background-color: #B58900;*/
+        /*margin-right: 10%;*/
         /*}*/
         /*.ui-datepicker-next:hover {*/
-            /*cursor: pointer;*/
+        /*cursor: pointer;*/
         /*}*/
         /*#ui-datepicker-div {*/
-            /*background-color: #002B36;*/
+        /*background-color: #002B36;*/
         /*}*/
         .fc-title {
             color: white;
         }
+
         .row {
             display: flex;
             flex-direction: row;
         }
+
         aside {
             margin-left: 3%;
             width: 300px;
         }
+
         .content-container {
             width: 90%;
             margin-top: 4%;
             margin-left: 5%;
         }
+
         .event-container {
             color: black;
         }
+
         .fc-event, .fc-event-dot {
             background-color: #B58900;
             border: none;
         }
-        .header{
+
+        .header {
             width: 200px;
         }
+
         th, td {
             padding: 5px;
             text-align: left;
         }
+
         logo {
             background-image: url("shiftilogo.png");
         }
+
         img {
-        display: block;
-        width:150px;
-        padding-top: 50px;
-        margin-left: auto;
-        margin-right: auto;
-        /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
-    }
+            display: block;
+            width: 150px;
+            padding-top: 50px;
+            margin-left: auto;
+            margin-right: auto;
+            /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+        }
     </style>
 
     <script>
         $(document).ready(function () {
+
+
+            var day = document.querySelector("#day")
+            day.onclick = function () {
+                setActiveStyleSheet("default")
+            }
+            var night = document.querySelector("#night")
+            night.onclick = function () {
+                setActiveStyleSheet("alternate")
+            }
+
+
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next',
@@ -130,12 +154,12 @@
                 }, {
                     headers: {'X-CSRFToken': csrf_token}
                 })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
                 // add event to calendar via modal
                 var eventData = {
                     title: username,
@@ -149,7 +173,7 @@
             // https://fullcalendar.io/docs/eventDrop this function is triggered when moving dates on calendar
             // $('#calendar').fullCalendar({
             //   events: [
-                // events here
+            // events here
             //   ],
             //   editable: true,
             //   eventDrop: function(event, delta, revertFunc) {
@@ -177,10 +201,10 @@
                     //         li.innerText = response.data.events[i].title + response.data.events[i].start + response.data.events[i].end;
                     //         ul.appendChild(li)
                     //     }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             // to add holidays to calendar
             // axios.get('https://www.googleapis.com/calendar/v3/calendars/en.uk%40holiday.calendar.google.com/events?key=AIzaSyBzz_Zfd65IMUl0Vo2R0fuWYcL1aGAtCgM')
             //     .then(function (response) {
@@ -193,14 +217,12 @@
             //         console.log(error);
             //     })
         });
+
         function log_out() {
             console.log('a');
             location.href = "{% url 'shifty:logout_user' %}";
         }
     </script>
-
-
-
 
 
 </head>
@@ -220,31 +242,31 @@
                 <h1> Days Off </h1>
                 <br>
                 <div id="off_list">
-            </div>
+                </div>
 
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Start</th>
-                            <th>End</th>
-                        </tr>
-                        {% for events in event_pie %}
-                        <tr>
-                            <td>{{events.title}} </td>
-                            <td>{{events.start}} </td>
-                            <td>{{events.end}} </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                    <br>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Start</th>
+                        <th>End</th>
+                    </tr>
+                    {% for events in event_pie %}
+                    <tr>
+                        <td>{{events.title}}</td>
+                        <td>{{events.start}}</td>
+                        <td>{{events.end}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br>
                 <button class='btn btn-primary' id="logout" onclick="log_out()">Log Out</button>
                 <img src="{% static 'shifty/shiftilogo.png' %}"/>
+            </div>
         </aside>
-</div>
-</div>
-
+    </div>
 </div>
 
+</div>
 
 
 <div class="modal fade" tabindex="-1" role="dialog">
@@ -276,11 +298,9 @@
         </div>
     </div>
 </div>
-<!--<button class='btn btn-primary' a href=”cappy/shifty/static/bstheme.css” onclick=”setActiveStyleSheet(‘stylesheet’); return false;”>Default Theme</a></button>-->
-<!--<button class='btn btn-primary' a href=”cappy/shifty/static/space.css” onclick=”setActiveStyleSheet(‘alternative stylesheet’); return false;”>Light Theme</a></button>-->
 
-
-
+<button type="button" id='day'>Dark Theme</button>
+<button type="button" id='night'>Light Theme</button>
 
 </body>
 </html>
