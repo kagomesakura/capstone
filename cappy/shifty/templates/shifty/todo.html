@@ -29,7 +29,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Shifti</title>
+    <title>To Do</title>
     <link rel="stylesheet" type="text/css" href="{% static 'shifty/bstheme.css' %}">
 <style>
     table {
@@ -41,14 +41,44 @@
         margin-top: 55px;
         margin-left: auto;
         margin-right: auto;
-        /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
     }
     button {
         background-color: #B58900;
     }
+    body {
+        color: #B58900;
+        text-align: center;
+    }
+    li {
+        /*text-align: center;*/
+        list-style-type: none;
+        font-size: 24px;
+        margin: 0 auto;
+        padding-bottom: 5px;
+    }
+    ul {
+        padding-bottom: 20px;
+    }
+    h {
+        font-size: 40px;
+    }
 </style>
 </head>
 <body>
-<img src="{% static 'shifty/shiftilogo.png' %}"/>
+<img src="{% static 'shifty/shiftilogo.png' %}"/> <br><br>
+<h>Management only features via admin panel:</h>
+<ul>
+  <li>Add/subtract employees.</li>
+  <li>Write in weekly schedule.</li>
+  <li>Add/subtract requested days off.</li>
+  <li></li>
+</ul>
+
+<h>Features To Be Added:</h>
+<ul>
+  <li>Color coded labels to differentiate all day and half day requests.</li>
+  <li></li>
+  <li></li>
+</ul>
 </body>
 </html>

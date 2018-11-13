@@ -48,6 +48,9 @@ def save_day_off(request):
 def index(request):
     return render(request, 'shifty/signin.html', {})
 
+def todo(request):
+    return render(request, 'shifty/todo.html', {})
+
 
 def register_user(request):
     try:
