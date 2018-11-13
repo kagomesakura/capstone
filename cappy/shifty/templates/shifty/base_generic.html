@@ -84,7 +84,7 @@
     <script>
         $(document).ready(function () {
 
-
+            //function to call the light and dark theme
             var day = document.querySelector("#day")
             day.onclick = function () {
                 setActiveStyleSheet("default")
@@ -94,7 +94,7 @@
                 setActiveStyleSheet("alternate")
             }
 
-
+            // pulls up fullcalendar library
             $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next',
@@ -105,6 +105,7 @@
                     prevYear: new moment().year() - 1,
                     nextYear: new moment().year() + 1
                 },
+                // to toggle through years, past and future
                 viewRender: function (view) {
                     var y = moment($('#calendar').fullCalendar('getDate')).year();
                     $(".fc-prevYear-button").text(y - 1);
@@ -113,6 +114,7 @@
                 navLinks: true,
                 selectable: true,
                 selectHelper: true,
+                //modal drop doown datepicker
                 select: function (start, end) {
                     $('#title').val('');
                     $('#starts-at').val(start.format('MM/DD/YYYY'));
@@ -121,6 +123,7 @@
                     $("#ends-at").datepicker();
                     $('.modal').modal('show');
                 },
+                // modal datepicker opens on onclick
                 eventClick: function (event, element) {
                     $('.modal').modal('show');
                     $('.modal').find('#username').val(event.username);
@@ -131,6 +134,7 @@
                 minTime: "05:00:00",
                 maxTime: "22:00:00",
                 editable: true,
+                // eventlimit determines how many notes can be added to one day i.e. 20 employees
                 eventLimit: 20
             });
             //logged in user... will place it in the calendar w/out having to enter a second text field
@@ -139,6 +143,7 @@
                 let start_date = $('#starts-at').val()
                 let end_date = $('#ends-at').val()
                 let csrf_token = '{{ csrf_token }}'
+
                 // save events to calendar
                 axios.post("{% url 'shifty:save_day_off' %}", {
                     start_date: start_date,
@@ -152,6 +157,7 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+
                 // add event to calendar via modal
                 var eventData = {
                     title: username,
@@ -260,9 +266,6 @@
         </div>
     </div>
 </div>
-<!--<div id="btntheme" style="text-align: center">-->
-<!--<button type="button" class="btn btn-primary btn-sm" id='day'>Dark Theme</button>-->
-<!--<button type="button" class="btn btn-primary btn-sm" id='night'>Light Theme</button>-->
 </div>
 
 </body>
