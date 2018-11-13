@@ -157,52 +157,17 @@
                 $('#calendar').fullCalendar('renderEvent', eventData, true);
                 $('.modal').modal('hide');
             });
-            // https://fullcalendar.io/docs/eventDrop this function is triggered when moving dates on calendar
-            // $('#calendar').fullCalendar({
-            //   events: [
-            // events here
-            //   ],
-            //   editable: true,
-            //   eventDrop: function(event, delta, revertFunc) {
-            //
-            //     alert(event.username + " was dropped on " + event.start.format());
-            //
-            //     if (!confirm("Are you sure about this change?")) {
-            //       revertFunc();
-            //     }
-            //
-            //   }
-            // });
+
             // get list from database to appear in calendar on page load
             axios.get("{% url 'shifty:get_days_off' %}")
                 .then(function (response) {
                     for (let i = 0; i < response.data.events.length; ++i) {
                         $('#calendar').fullCalendar('renderEvent', response.data.events[i], true);
                     }
-                    // building list of day off on the right
-                    //     let ul = document.querySelector('#off_list')
-                    //     for (let i = 0; i < response.data.events.length; ++i) {
-                    //         let li = document.createElement('li')
-                    //         // format the date to look better
-                    //         // li.innerText = response.data.events[i].title + " " + " " + moment().format("MMM Do") + " - " + moment().format("Do");
-                    //         li.innerText = response.data.events[i].title + response.data.events[i].start + response.data.events[i].end;
-                    //         ul.appendChild(li)
-                    //     }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-            // to add holidays to calendar
-            // axios.get('https://www.googleapis.com/calendar/v3/calendars/en.uk%40holiday.calendar.google.com/events?key=AIzaSyBzz_Zfd65IMUl0Vo2R0fuWYcL1aGAtCgM')
-            //     .then(function (response) {
-            //         console.log(response.data);
-            //         for (let i = 0; i < response.data.events.length; ++i) {
-            //             $('#calendar').fullCalendar('renderEvent', response.data.events[i], true);
-            //         }
-            //     })
-            //     .catch(function (error) {
-            //         console.log(error);
-            //     })
         });
 
         function log_out() {
