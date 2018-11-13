@@ -5749,6 +5749,7 @@ button.close {
   background-color: transparent;
   border: 0;
   -webkit-appearance: none;
+  float: left;
 }
 
 .modal-open {
