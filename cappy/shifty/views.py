@@ -12,6 +12,10 @@ from django.views.decorators.cache import never_cache
 def signin(request):
      return render(request, 'shifty/signin.html', {})
 
+
+def todo(request):
+    return render(request, 'shifty/todo.html', {})
+
 @login_required
 def calendar(request):
     days_off = DayOff.objects.all()
