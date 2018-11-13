@@ -20,23 +20,6 @@
     <script type="text/javascript" src="{% static 'shifty/styleswitcher.js' %}"></script>
 
     <style>
-        /*.ui-datepicker-prev {*/
-        /*background-color: #B58900;*/
-        /*margin-right: 10%;*/
-        /*}*/
-        /*.ui-datepicker-prev:hover {*/
-        /*cursor: pointer;*/
-        /*}*/
-        /*.ui-datepicker-next {*/
-        /*background-color: #B58900;*/
-        /*margin-right: 10%;*/
-        /*}*/
-        /*.ui-datepicker-next:hover {*/
-        /*cursor: pointer;*/
-        /*}*/
-        /*#ui-datepicker-div {*/
-        /*background-color: #002B36;*/
-        /*}*/
         .fc-title {
             color: white;
         }
@@ -53,8 +36,9 @@
 
         .content-container {
             width: 90%;
-            margin-top: 4%;
+            margin-top: 3%;
             margin-left: 5%;
+            padding-bottom: 15px;
         }
 
         .event-container {
@@ -75,6 +59,10 @@
             text-align: left;
         }
 
+        table {
+            width:300px;
+        }
+
         logo {
             background-image: url("shiftilogo.png");
         }
@@ -85,7 +73,6 @@
             padding-top: 50px;
             margin-left: auto;
             margin-right: auto;
-            /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
         }
     </style>
 
@@ -298,9 +285,10 @@
         </div>
     </div>
 </div>
-
-<button type="button" id='day'>Dark Theme</button>
-<button type="button" id='night'>Light Theme</button>
+<div id="btntheme" style="text-align: center">
+<button type="button" class="btn btn-primary btn-sm" id='day'>Dark Theme</button>
+<button type="button" class="btn btn-primary btn-sm" id='night'>Light Theme</button>
+</div>
 
 </body>
 </html>
