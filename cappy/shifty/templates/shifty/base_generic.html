@@ -20,6 +20,10 @@
     <script type="text/javascript" src="{% static 'shifty/styleswitcher.js' %}"></script>
 
     <style>
+        #btntheme {
+            /*width: 200px;*/
+            padding-bottom: 5px;
+        }
         .fc-title {
             color: white;
         }
@@ -48,6 +52,7 @@
         .fc-event, .fc-event-dot {
             background-color: #B58900;
             border: none;
+            /*font-size: medium;*/
         }
 
         .header {
@@ -126,9 +131,9 @@
                 minTime: "05:00:00",
                 maxTime: "22:00:00",
                 editable: true,
-                eventLimit: true
+                eventLimit: 20
             });
-            //let username places logged in username  in database and will place it in the calendar w/out having to enter a second text field
+            //logged in user... will place it in the calendar w/out having to enter a second text field
             $('#save-event').on('click', function () {
                 let username = '{{user.username}}'
                 let start_date = $('#starts-at').val()
@@ -191,7 +196,14 @@
 
         <aside>
             <div class="header">
-                <h1> Days Off </h1>
+                <aside>
+    <div id="btntheme" style="text-align: center">
+    <button type="button" class="btn btn-primary btn-sm" id='day'>Dark Theme</button>
+    <button type="button" class="btn btn-primary btn-sm" id='night'>Light Theme</button>
+    </div>
+</aside>
+            </div>
+            <h1> Days Off </h1>
                 <br>
                 <div id="off_list">
                 </div>
@@ -218,7 +230,12 @@
     </div>
 </div>
 
-</div>
+<!--<aside>-->
+    <!--<div id="btntheme" style="text-align: center">-->
+    <!--<button type="button" class="btn btn-primary btn-sm" id='day'>Dark Theme</button>-->
+    <!--<button type="button" class="btn btn-primary btn-sm" id='night'>Light Theme</button>-->
+    <!--</div>-->
+<!--</aside>-->
 
 
 <div class="modal fade" tabindex="-1" role="dialog">
@@ -250,9 +267,9 @@
         </div>
     </div>
 </div>
-<div id="btntheme" style="text-align: center">
-<button type="button" class="btn btn-primary btn-sm" id='day'>Dark Theme</button>
-<button type="button" class="btn btn-primary btn-sm" id='night'>Light Theme</button>
+<!--<div id="btntheme" style="text-align: center">-->
+<!--<button type="button" class="btn btn-primary btn-sm" id='day'>Dark Theme</button>-->
+<!--<button type="button" class="btn btn-primary btn-sm" id='night'>Light Theme</button>-->
 </div>
 
 </body>

@@ -256,6 +256,7 @@ svg {
 table, tbody {
   border-collapse: collapse;
   width: 300px;
+  font-size: 14px;
 }
 
 caption {

@@ -50,22 +50,30 @@
         text-align: center;
     }
     li {
-        /*text-align: center;*/
         list-style-type: none;
         font-size: 28px;
         margin: 0 auto;
         padding-bottom: 5px;
+        text-shadow: 2px 2px 4px #000000;
     }
     ul {
         padding-bottom: 20px;
     }
     h {
         font-size: 45px;
+        text-shadow: 2px 2px 4px #000000;
+    }
+    p {
+        font-family: "Verdana";
+        font-size: 28px;
+        color: white;
+        text-shadow: 2px 2px 4px #000000;
     }
 </style>
 </head>
 <body>
-<img src="{% static 'shifty/shiftilogo.png' %}"/> <br><br>
+<img src="{% static 'shifty/shiftilogo.png' %}"/> <br>
+<p>kagomemiller@gmail.com</p><br>
 <h>Management only features via admin panel:</h>
 <ul>
   <li>Add/subtract employees.</li>
@@ -77,7 +85,7 @@
 <h>Features To Be Added:</h>
 <ul>
   <li>Color coded labels to differentiate all day and half day requests.</li>
-  <li></li>
+  <li>Select specific hours, if half day.</li>
   <li></li>
 </ul>
 </body>
