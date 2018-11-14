@@ -45,7 +45,7 @@
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 .fc-unthemed td.fc-today {
-background: rgba(63, 152, 71, 0.6);
+background: white;
 }
 .ui-datepicker-prev {
     background-color: #ffffff;
@@ -94,8 +94,13 @@ html {
 }
 .fc-content {
   font-size: small;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));*/
+  /*background-image: linear-gradient(#067020, #509a62 50%, #200670);*/
+
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
+
+
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
@@ -133,7 +138,12 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }
-
+.fc-view-container {
+  background-color: #e8e8e8;
+}
+tr:nth-child(even) {
+    background-color: #e8e8e8;
+}
 hr {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
@@ -1747,7 +1757,7 @@ pre code {
 }
 
 .table .table {
-  background-color: #fff;
+  background-color: #cfcfcf;
 }
 
 .table-sm th,
@@ -9606,8 +9616,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 /*logout button*/
 .btn-primary {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
@@ -9615,8 +9625,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .btn-primary:not(.disabled):hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
@@ -9643,16 +9653,16 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .btn-success {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
 }
 
 .btn-success:not(.disabled):hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
@@ -9660,8 +9670,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .btn-info {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;
@@ -9669,8 +9679,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .btn-info:not(.disabled):hover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#067020), color-stop(50%, #509a62), to(#200670));
-  background-image: linear-gradient(#067020, #509a62 50%, #200670);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3c7033), color-stop(50%, #509a62), to(#703e64));
+  background-image: linear-gradient(#3c7033, #509a62 50%, #703e64);
   background-repeat: no-repeat;
   -webkit-filter: none;
           filter: none;

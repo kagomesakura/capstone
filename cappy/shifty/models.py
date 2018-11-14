@@ -20,3 +20,7 @@ class DayOff(models.Model):
 
     def to_pretty_dict(self):
         return {'id': self.id, 'title': self.user.username, 'start': self.start.strftime('%b %e'), 'end': self.end.strftime('%b %e')}
+
+
+# def __str__(self)
+
