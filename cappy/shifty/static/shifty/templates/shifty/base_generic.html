@@ -27,51 +27,41 @@
         .fc-title {
             color: white;
         }
-
         .row {
             display: flex;
             flex-direction: row;
         }
-
         aside {
             margin-left: 3%;
             width: 300px;
         }
-
         .content-container {
             width: 90%;
             margin-top: 3%;
             margin-left: 5%;
             padding-bottom: 15px;
         }
-
         .event-container {
             color: black;
         }
-
         .fc-event, .fc-event-dot {
             background-color: #B58900;
             border: none;
             /*font-size: medium;*/
         }
-
         .header {
             width: 200px;
         }
-
         th, td {
             padding: 5px;
             text-align: left;
         }
-
         table {
             width:300px;
         }
-
         logo {
             background-image: url("shiftilogo.png");
         }
-
         img {
             display: block;
             width: 150px;
@@ -83,7 +73,6 @@
 
     <script>
         $(document).ready(function () {
-
             //function to call the light and dark theme
             var day = document.querySelector("#day")
             day.onclick = function () {
@@ -93,7 +82,6 @@
             night.onclick = function () {
                 setActiveStyleSheet("alternate")
             }
-
             // pulls up fullcalendar library
             $('#calendar').fullCalendar({
                 header: {
@@ -143,7 +131,6 @@
                 let start_date = $('#starts-at').val()
                 let end_date = $('#ends-at').val()
                 let csrf_token = '{{ csrf_token }}'
-
                 // save events to calendar
                 axios.post("{% url 'shifty:save_day_off' %}", {
                     start_date: start_date,
@@ -157,7 +144,6 @@
                     .catch(function (error) {
                         console.log(error);
                     });
-
                 // add event to calendar via modal
                 var eventData = {
                     title: username,
@@ -168,7 +154,6 @@
                 $('#calendar').fullCalendar('renderEvent', eventData, true);
                 $('.modal').modal('hide');
             });
-
             // get list from database to appear in calendar on page load
             axios.get("{% url 'shifty:get_days_off' %}")
                 .then(function (response) {
@@ -180,7 +165,6 @@
                     console.log(error);
                 });
         });
-
         function log_out() {
             console.log('a');
             location.href = "{% url 'shifty:logout_user' %}";
