@@ -32,3 +32,6 @@ Objects to include:
 - Make sure database can be viewed in calendar format/printed.
 ### Week 3
 - Design aspect.
+
+
+## Light Theme was chosen by the client.
